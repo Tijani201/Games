@@ -11,4 +11,5 @@ router.post('/games', Games.addGames)
 router.put('/games/:id', Games.updateGames)
 router.get('/games/rating', Games.getGamesByRating)
 router.get('/games/likes', Games.getGamesByLikes)
+router.get('/games/title', Games.getGamesByTitle)
 module.exports = router
