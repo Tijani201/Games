@@ -72,6 +72,51 @@ class Games {
             })
         })	  
       }	
+
+      static getGamesByRating(req, res) {
+        if (req.query.rating) {
+          const rating = parseInt(req.query.rating)
+          gamesModel
+            .findAll({
+              where: {
+                rating: {
+                  [Op.eq]: rating
+                }
+              }
+            })
+            .then((games) => {
+              res.status(200).send({ games })
+            })
+        }
+        if (req.query.rating_greater_than) {
+          const rating = parseInt(req.query.rating_greater_than)
+          gamesModel
+            .findAll({
+              where: {
+                rating: {
+                  [Op.gt]: rating
+                }
+              }
+            })
+            .then((games) => {
+              res.status(200).send({ games })
+            })
+        }
+        if (req.query.rating_less_than) {
+          const likes = parseInt(req.query.rating_less_than)
+          gamesModel
+            .findAll({
+              where: {
+                rating: {
+                  [Op.lt]: rating
+                }
+              }
+            })
+            .then((games) => {
+              res.status(200).send({ games })
+            })
+        }
+      }
   }
   
   export default Games
