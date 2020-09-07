@@ -117,6 +117,51 @@ class Games {
             })
         }
       }
+
+      static getGamesByLikes(req, res) {
+        if (req.query.likes) {
+          const likes = parseInt(req.query.likes)
+          gamesModel
+            .findAll({
+              where: {
+                likes: {
+                  [Op.eq]: likes
+                }
+              }
+            })
+            .then((games) => {
+              res.status(200).send({ games })
+            })
+        }
+        if (req.query.likes_greater_than) {
+          const likes = parseInt(req.query.likes_greater_than)
+          gamesModel
+            .findAll({
+              where: {
+                likes: {
+                  [Op.gt]: likes
+                }
+              }
+            })
+            .then((games) => {
+              res.status(200).send({ games })
+            })
+        }
+        if (req.query.likes_less_than) {
+          const likes = parseInt(req.query.likes_less_than)
+          gamesModel
+            .findAll({
+              where: {
+                likes: {
+                  [Op.lt]: likes
+                }
+              }
+            })
+            .then((games) => {
+              res.status(200).send({ games })
+            })
+        }
+      }
   }
   
   export default Games
