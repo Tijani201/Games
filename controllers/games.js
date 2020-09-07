@@ -162,6 +162,18 @@ class Games {
             })
         }
       }
+
+      static getGamesByTitle(req, res) {
+        gamesModel.findAll({
+          where: {
+            title: {
+              [Op.substring]: `%${req.query.title}%`
+            }
+          }
+        }).then((games) => {
+          res.status(200).send({ data: games })
+        })
+      }
   }
   
   export default Games
