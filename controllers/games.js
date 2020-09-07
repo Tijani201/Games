@@ -33,6 +33,21 @@ class Games {
               .send({ message: `Single games found ${id} sucessfully`, games })
           })
       }
+
+      static addGames(req, res) {
+        gamesModel.create({
+          title: req.body.title,
+          genres: req.body.genres,
+          year: req.body.year,
+          price: req.body.price,
+          like: req.body.likes,
+          description: req.body.description
+        }).then((newGame) => {
+          return res
+            .status(201)
+            .send({ message: 'Game added successfully', data: newGame })
+        })
+      }
   }
   
   export default Games
