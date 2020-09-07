@@ -8,5 +8,5 @@ const router = express.Router()
 router.get('/games', Games.getAllGames)
 router.get('/game/:id', Games.getSingleGames)
 router.post('/games', Games.addGames)
-
+router.put('/games/:id', Games.updateGames)
 module.exports = router
