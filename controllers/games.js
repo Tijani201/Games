@@ -13,6 +13,26 @@ class Games {
           res.status(200).send({ message: 'Games fetched successfully', games })
         })
       }
+
+      static getSingleGames(req, res) {
+        const id = parseInt(req.params.id)
+        gamesModel
+          .findOne({
+            where: {
+              id
+            }
+          })
+          .then((games) => {
+            if (!games) {
+              return res.status(404).send({
+                message: 'games not found'
+              })
+            }
+            return res
+              .status(200)
+              .send({ message: `Single games found ${id} sucessfully`, games })
+          })
+      }
   }
   
   export default Games
