@@ -17,4 +17,17 @@ describe('Games Api', () => {
       })
     })
   })
+
+  describe('/GET Get all games', () => {
+    it('it should GET all the games', (done) => {
+      request.get('/games').end((err, res) => {
+        res.status.should.be.equal(200)
+        expect(res.body.games).to.be.an('array')
+        expect(res.body.message).be.equal('Games fetched successfully')
+        done()
+      })
+    })
+  })
 })
+
+
