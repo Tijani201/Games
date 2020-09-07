@@ -188,6 +188,51 @@ class Games {
             res.status(200).send({ data: games })
           })
       }
+
+      static getGamesByYear(req, res) {
+        if (req.query.year) {
+          const year = parseInt(req.query.year)
+          gamesModel
+            .findAll({
+              where: {
+                year: {
+                  [Op.eq]: year
+                }
+              }
+            })
+            .then((games) => {
+              res.status(200).send({ games })
+            })
+        }
+        if (req.query.year_greater_than) {
+          const year = parseInt(req.query.year_greater_than)
+          gamesModel
+            .findAll({
+              where: {
+                year: {
+                  [Op.gt]: year
+                }
+              }
+            })
+            .then((games) => {
+              res.status(200).send({ games })
+            })
+        }
+        if (req.query.year_less_than) {
+          const year = parseInt(req.query.year_less_than)
+          gamesModel
+            .findAll({
+              where: {
+                year: {
+                  [Op.lt]: year
+                }
+              }
+            })
+            .then((games) => {
+              res.status(200).send({ games })
+            })
+        }
+      }
   }
   
   export default Games
