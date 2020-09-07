@@ -48,6 +48,30 @@ class Games {
             .send({ message: 'Game added successfully', data: newGame })
         })
       }
+
+      static updateGames(req, res) {
+        const id = parseInt(req.params.id)
+        gamesModel.findByPk(id).then((games) => {
+          if (!games) {
+            return res.status(404).send({ message: 'Games not found' })
+          }
+          return games
+            .update({
+              title: req.body.title || games.title,
+              genres: req.body.genres || games.genre,
+              rating: games.rating,
+              likes: games.likes,
+              year: req.body.year || games.year,
+              price: req.body.price || games.price,
+              description: req.body.description || games.description
+            })
+            .then((updatedGames) => {
+              return res
+                .status(200)
+                .send({ message: 'Games updated successfully', data: updatedGames })
+            })
+        })	  
+      }	
   }
   
   export default Games
