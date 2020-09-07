@@ -233,6 +233,21 @@ class Games {
             })
         }
       }
+
+      static deleteGames(req, res) {
+        gamesModel.findByPk(req.params.id).then((games) => {
+          if (!games) {
+            return res.status(404).send({
+              message: 'Games not found'
+            })
+          }
+          return games.destroy().then(() => {
+            return res.status(204).send({
+              message: 'Games deleted successfully'
+            })
+          })
+        })
+      }
   }
   
   export default Games
