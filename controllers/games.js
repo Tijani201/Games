@@ -174,6 +174,20 @@ class Games {
           res.status(200).send({ data: games })
         })
       }
+
+      static getGamesBygenres(req, res) {
+        gamesModel
+          .findAll({
+            where: {
+              genres: {
+                [Op.substring]: `%${req.query.genres}%`
+              }
+            }
+          })
+          .then((games) => {
+            res.status(200).send({ data: games })
+          })
+      }
   }
   
   export default Games
