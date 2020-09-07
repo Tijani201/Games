@@ -12,4 +12,5 @@ router.put('/games/:id', Games.updateGames)
 router.get('/games/rating', Games.getGamesByRating)
 router.get('/games/likes', Games.getGamesByLikes)
 router.get('/games/title', Games.getGamesByTitle)
+router.get('/games/genres', Games.getGamesBygenres)
 module.exports = router
