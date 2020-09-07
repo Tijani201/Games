@@ -5,6 +5,6 @@ import Games from '../controllers/games'
 const router = express.Router()
 
 /* GET home page. */
-router.get('/', Games.welcome)
+router.get('/games', Games.getAllGames)
 
 module.exports = router
