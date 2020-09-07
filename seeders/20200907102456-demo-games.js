@@ -51,8 +51,7 @@ module.exports = {
         rating: 44,
         likes: 5040,
         year: 1890,
-        description:
-          'God of war is an actiong game which is very intresting',
+        description: 'God of war is an actiong game which is very intresting',
         createdAt: new Date(),
         updatedAt: new Date()
       },
