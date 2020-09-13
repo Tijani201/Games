@@ -179,6 +179,21 @@ class Games {
       })
   }
 
+  static getGamesByProducer(req, res) {
+    gamesModel.findAll({
+      where: {
+        producer: {
+          [Op.substring]: `%${req.query.producer}%`
+        }
+      }
+    }).then((games) => {
+      res.status(200).send({
+        message: 'Games by producer retrieved sucessfully',
+        data: games
+      })
+    })
+  }
+
   static getGamesBygenres(req, res) {
     gamesModel
       .findAll({
