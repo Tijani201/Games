@@ -49,7 +49,7 @@ describe('Games Api', () => {
     })
   })
 
-// Test Get all games
+  // Test Get all games
   describe('/GET Get all games', () => {
     it('it should GET all the games', (done) => {
       request.get('/games').end((err, res) => {
@@ -61,7 +61,7 @@ describe('Games Api', () => {
     })
   })
 
-
+  //update games test
   describe('Update games route', () => {
     it('should UPDATE a games given the id', (done) => {
       request
@@ -129,6 +129,118 @@ describe('Games Api', () => {
           expect(res.body.message).be.equal('Title cannot be empty')
           done()
         })
+    })
+
+    it('should return producer cannot be empty if user doesnt put a producer', (done) => {
+      request
+        .put(`/games/${newGames.id}`)
+        .send({
+          title: 'How to get away with murder',
+          genres: 'comedy',
+          producer: '',
+          cast: 'coding class',
+          plot: 'Just a random games',
+          year: '1999'
+        })
+        .end((err, res) => {
+          res.status.should.be.equal(200)
+          expect(res.body.message).be.equal('Games updated successfully')
+          done()
+        })
+    })
+
+    // Add games test
+    describe('Add games route', () => {
+      it('should Add Games', (done) => {
+        request
+          .post('/games')
+          .send({
+            title: 'Orange is the new black',
+            genres: 'Drama',
+            producer: 'Joy',
+            cast: 'Alex Michael',
+            plot:
+              'Ten years after transporting drug money to alex, Piper is imprisoned for drugs',
+            year: '2009'
+          })
+          .end((err, res) => {
+            res.status.should.be.equal(201)
+            expect(res.body.message).be.equal('Game added successfully')
+            done()
+          })
+      })
+      it('should Add Games when id does not exist', (done) => {
+        request
+          .post('/games/2222')
+          .send({
+            title: 'Orange is the new black',
+            genres: 'Drama',
+            producer: 'Joy',
+            cast: 'Alex Michael',
+            plot:
+              'Ten years after transporting drug money to alex, Piper is imprisoned for drugs',
+            year: '2009'
+          })
+          .end((err, res) => {
+            res.status.should.be.equal(404)
+            expect(res.body.message).be.equal(undefined)
+            done()
+          })
+      })
+      it('should return Year must be a number if the year passed isnt a number', (done) => {
+        request
+          .post('/games')
+          .send({
+            title: 'Orange is the new black',
+            genres: 'Drama',
+            producer: 'Joy',
+            cast: 'Alex Michael',
+            plot:
+              'Ten years after transporting drug money to alex, Piper is imprisoned for drugs',
+            year: 'hey'
+          })
+          .end((err, res) => {
+            res.status.should.be.equal(400)
+            expect(res.body.message).be.equal('Year must be a number')
+            done()
+          })
+      })
+      it('should return title cannot be empty if user doesnt put a title', (done) => {
+        request
+          .post('/games')
+          .send({
+            title: '',
+            genres: 'Drama',
+            producer: 'Joy',
+            cast: 'Alex Michael',
+            plot:
+              'Ten years after transporting drug money to alex, Piper is imprisoned for drugs',
+            year: '2009'
+          })
+          .end((err, res) => {
+            res.status.should.be.equal(400)
+            expect(res.body.message).be.equal('Title cannot be empty')
+            done()
+          })
+      })
+      it('should return producer cannot be empty if user doesnt put an producer', (done) => {
+        request
+          .post('/games')
+          .send({
+            title: 'Orange is the new black',
+            genres: 'Drama',
+            producer: '',
+            cast: 'Alex Michael',
+            plot:
+              'Ten years after transporting drug money to alex, Piper is imprisoned for drugs',
+            year: '2009'
+          })
+          .end((err, res) => {
+            res.status.should.be.equal(201)
+            expect(res.body.message).be.equal('Game added successfully')
+            done()
+          })
+      })
     })
   })
 })
