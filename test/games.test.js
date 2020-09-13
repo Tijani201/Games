@@ -242,5 +242,19 @@ describe('Games Api', () => {
           })
       })
     })
+    
+// Get Games By Title
+    describe('Get Games By title route', () => {
+      it('should get games by title', (done) => {
+        request
+          .get('/games/title')
+          .query({ title: 'How to get away with murder' })
+          .end((err, res) => {
+            res.status.should.be.equal(200)
+            expect(res.body.data).to.be.an('array')
+            done()
+          })
+      })
+    })
   })
 })
