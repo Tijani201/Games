@@ -9,7 +9,7 @@ import validateAddGames from '../middleware/games'
 router.get('/games', Games.getAllGames)
 router.get('/game/:id', Games.getSingleGames)
 router.post('/games', validateAddGames, Games.addGames)
-router.put('/games/:id', Games.updateGames)
+router.put('/games/:id', validateAddGames, Games.updateGames)
 router.get('/games/rating', Games.getGamesByRating)
 router.get('/games/likes', Games.getGamesByLikes)
 router.get('/games/title', Games.getGamesByTitle)
