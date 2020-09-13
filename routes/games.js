@@ -14,6 +14,7 @@ router.get('/games/rating', Games.getGamesByRating)
 router.get('/games/likes', Games.getGamesByLikes)
 router.get('/games/title', Games.getGamesByTitle)
 router.get('/games/genres', Games.getGamesBygenres)
+router.get('/games/producer', Games.getGamesByProducer)
 router.get('/games/year', Games.getGamesByYear)
 router.delete('/games/:id', Games.deleteGames)
 

@@ -7,6 +7,7 @@ module.exports = (sequelize, DataTypes) => {
         rating: DataTypes.INTEGER,
         likes: DataTypes.INTEGER,
         year: DataTypes.INTEGER,
+        producer: DataTypes.STRING,
         description: DataTypes.STRING
       },
       {}
