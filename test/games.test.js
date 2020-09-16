@@ -301,5 +301,18 @@ describe('Games Api', () => {
         })
       })
     })
+
+    describe('Get games By genres route', () => {
+      it('should get games by genres', (done) => {
+        request
+          .get('/games/genres')
+          .query({ genres: 'update RnB' })
+          .end((err, res) => {
+            res.status.should.be.equal(200)
+            expect(res.body.data).to.be.an('array')
+            done()
+          })
+      })
+    })
   })
 })
