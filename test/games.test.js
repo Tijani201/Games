@@ -9,6 +9,7 @@ const should = chai.should()
 const request = supertest.agent(server)
 const gamesModel = models.Games
 let newGames = {}
+let gamesToDelete = {}
 
 describe('Games Api', () => {
   before(async () => {
@@ -18,7 +19,7 @@ describe('Games Api', () => {
     // add a games to the database
     await gamesModel.create({
       title: 'test games',
-      genres: 'comedy',
+      genres: 'action',
       rating: 5,
       likes: 700,
       year: 2020,
@@ -26,12 +27,20 @@ describe('Games Api', () => {
     })
 
     newGames = await gamesModel.create({
-      title: 'Beds of Lies',
-      genres: 'Musical',
+      title: '100ft Robot Golf',
+      genres: 'Sports',
       rating: 7,
       likes: 110,
       year: 2023,
-      description: 'Just nicki minaj song'
+      description: 'No Goblin'
+    })
+
+    gamesToDelete = await gamesModel.create({
+      title: 'Pes 2021',
+      genres: 'Sport',
+      rating: 500,
+      year: 2021,
+      description: 'Pro Evolution Soccer'
     })
   })
   after(async () => {
@@ -254,6 +263,22 @@ describe('Games Api', () => {
             expect(res.body.data).to.be.an('array')
             done()
           })
+      })
+    })
+
+    describe('Delete games', () => {
+      it('should DELETE a Game given the id', (done) => {
+        request.delete(`/games/${gamesToDelete.id}`).end((err, res) => {
+          res.status.should.be.equal(204)
+          done()
+        })
+      })
+      it('should return Games does not exist', (done) => {
+        request.delete('/games/070334').end((err, res) => {
+          res.status.should.be.equal(404)
+          expect(res.body.message).be.equal('Games not found')
+          done()
+        })
       })
     })
   })
