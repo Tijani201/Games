@@ -281,5 +281,25 @@ describe('Games Api', () => {
         })
       })
     })
+
+    describe('Get single games', () => {
+      it('should GET a games by id', (done) => {
+        request.get(`/game/${newGames.id}`).end((err, res) => {
+          res.status.should.be.equal(200)
+          res.body.should.be.a('object')
+          expect(res.body.games).to.have.property('title')
+          expect(res.body.games).to.have.property('rating')
+          expect(res.body.games).to.have.property('year')
+          done()
+        })
+      })
+      it('it should GET a games by id', (done) => {
+        request.get('/game/8888').end((err, res) => {
+          res.status.should.be.equal(404)
+          expect(res.body.message).to.equal('games not found')
+          done()
+        })
+      })
+    })
   })
 })
