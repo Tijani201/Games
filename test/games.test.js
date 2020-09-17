@@ -314,5 +314,38 @@ describe('Games Api', () => {
           })
       })
     })
+
+    describe('Get games By rating', () => {
+      it('should get games by rating', (done) => {
+        request
+          .get('/games/rating')
+          .query({ rating: '5' })
+          .end((err, res) => {
+            res.status.should.be.equal(200)
+            expect(res.body.games).to.be.an('array')
+            done()
+          })
+      })
+      it('should get games by rating greater than', (done) => {
+        request
+          .get('/games/rating/')
+          .query({ rating_greater_than: '5' })
+          .end((err, res) => {
+            res.status.should.be.equal(200)
+            expect(res.body.games).to.be.an('array')
+            done()
+          })
+      })
+      it('should get games by rating less than', (done) => {
+        request
+          .get('/games/rating/')
+          .query({ rating_less_than: '5' })
+          .end((err, res) => {
+            res.status.should.be.equal(200)
+            expect(res.body.games).to.be.an('array')
+            done()
+          })
+      })
+    })
   })
 })
