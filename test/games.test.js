@@ -347,5 +347,38 @@ describe('Games Api', () => {
           })
       })
     })
+
+    describe('Get games By likes Route', () => {
+      it('should get games by likes', (done) => {
+        request
+          .get('/games/likes')
+          .query({ likes: 500 })
+          .end((err, res) => {
+            res.status.should.be.equal(200)
+            expect(res.body.data).to.be.an('array')
+            done()
+          })
+      })
+      it('should get games by likes greater than', (done) => {
+        request
+          .get('/games/likes')
+          .query({ likes_greater_than: 300 })
+          .end((err, res) => {
+            res.status.should.be.equal(200)
+            expect(res.body.data).to.be.an('array')
+            done()
+          })
+      })
+      it('should get games by likes less than', (done) => {
+        request
+          .get('/games/likes')
+          .query({ likes_less_than: 300 })
+          .end((err, res) => {
+            res.status.should.be.equal(200)
+            expect(res.body.data).to.be.an('array')
+            done()
+          })
+      })
+    })
   })
 })
