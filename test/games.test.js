@@ -380,5 +380,38 @@ describe('Games Api', () => {
           })
       })
     })
+
+    describe('Get games By Year Route', () => {
+      it('should get games by year', (done) => {
+        request
+          .get('/games/year')
+          .query({ year: 2018 })
+          .end((err, res) => {
+            res.status.should.be.equal(200)
+            expect(res.body.data).to.be.an('array')
+            done()
+          })
+      })
+      it('should get games by year greater than', (done) => {
+        request
+          .get('/games/year')
+          .query({ year_greater_than: 2005 })
+          .end((err, res) => {
+            res.status.should.be.equal(200)
+            expect(res.body.data).to.be.an('array')
+            done()
+          })
+      })
+      it('should get games by year less than', (done) => {
+        request
+          .get('/games/year')
+          .query({ year_less_than: 2002 })
+          .end((err, res) => {
+            res.status.should.be.equal(200)
+            expect(res.body.data).to.be.an('array')
+            done()
+          })
+      })
+    })
   })
 })
