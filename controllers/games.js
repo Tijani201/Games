@@ -105,7 +105,7 @@ class Games {
         })
     }
     if (req.query.rating_less_than) {
-      const likes = parseInt(req.query.rating_less_than)
+      const rating = parseInt(req.query.rating_less_than)
       gamesModel
         .findAll({
           where: {
