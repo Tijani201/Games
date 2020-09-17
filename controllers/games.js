@@ -132,7 +132,7 @@ class Games {
           }
         })
         .then((games) => {
-          res.status(200).send({ games })
+          res.status(200).send({ data: games })
         })
     }
     if (req.query.likes_greater_than) {
@@ -146,7 +146,7 @@ class Games {
           }
         })
         .then((games) => {
-          res.status(200).send({ games })
+          res.status(200).send({ data: games })
         })
     }
     if (req.query.likes_less_than) {
@@ -160,7 +160,7 @@ class Games {
           }
         })
         .then((games) => {
-          res.status(200).send({ games })
+          res.status(200).send({ data: games })
         })
     }
   }
