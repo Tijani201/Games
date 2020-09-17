@@ -42,6 +42,7 @@ class Games {
         year: req.body.year,
         price: req.body.price,
         like: req.body.likes,
+        developer:req.body.developer,
         description: req.body.description
       })
       .then((newGame) => {
@@ -179,16 +180,16 @@ class Games {
       })
   }
 
-  static getGamesByProducer(req, res) {
+  static getGamesByDescription(req, res) {
     gamesModel.findAll({
       where: {
-        producer: {
-          [Op.substring]: `%${req.query.producer}%`
+        description: {
+          [Op.substring]: `%${req.query.description}%`
         }
       }
     }).then((games) => {
       res.status(200).send({
-        message: 'Games by producer retrieved sucessfully',
+        message: 'Games by description retrieved sucessfully',
         data: games
       })
     })

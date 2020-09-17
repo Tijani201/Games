@@ -22,7 +22,7 @@ module.exports = {
       year: {
         type: Sequelize.INTEGER
       },
-      producer: {
+      developer: {
         type: Sequelize.STRING
       },
       description: {

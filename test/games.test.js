@@ -23,6 +23,7 @@ describe('Games Api', () => {
       rating: 5,
       likes: 700,
       year: 2020,
+      developer: 'Usman Tijani',
       description: 'Just a random test games'
     })
 
@@ -32,6 +33,7 @@ describe('Games Api', () => {
       rating: 7,
       likes: 110,
       year: 2023,
+      developer: 'Usman Tijani',
       description: 'No Goblin'
     })
 
@@ -78,7 +80,7 @@ describe('Games Api', () => {
         .send({
           title: 'How to make nigerians suffer',
           genres: 'Action',
-          producer: 'Tijani',
+          developer: 'Tijani',
           year: '2022',
           description: 'Just a random test games'
         })
@@ -94,7 +96,7 @@ describe('Games Api', () => {
         .send({
           title: 'How to get away with murder',
           genres: 'comedy',
-          producer: 'Jt Tomwest',
+          developer: 'Jt Tomwest',
           year: '2005',
           publisher: 'coding class',
           description: 'Just a random test games'
@@ -111,7 +113,7 @@ describe('Games Api', () => {
         .send({
           title: 'How to get away with murder',
           genres: 'comedy',
-          producer: 'ogenyi Janet',
+          developer: 'ogenyi Janet',
           year: 'yes',
           publisher: 'coding class',
           description: 'Just a random test games'
@@ -128,7 +130,7 @@ describe('Games Api', () => {
         .send({
           title: '',
           genres: 'comedy',
-          producer: 'Usman Tijani',
+          developer: 'Usman Tijani',
           year: 2020,
           publisher: 'coding class',
           description: 'Just a random test games'
@@ -140,13 +142,13 @@ describe('Games Api', () => {
         })
     })
 
-    it('should return producer cannot be empty if user doesnt put a producer', (done) => {
+    it('should return developer cannot be empty if user doesnt put a developer', (done) => {
       request
         .put(`/games/${newGames.id}`)
         .send({
           title: 'How to get away with murder',
           genres: 'comedy',
-          producer: '',
+          developer: '',
           cast: 'coding class',
           plot: 'Just a random games',
           year: '1999'
@@ -166,7 +168,7 @@ describe('Games Api', () => {
           .send({
             title: 'Orange is the new black',
             genres: 'Drama',
-            producer: 'Joy',
+            developer: 'Joy',
             cast: 'Alex Michael',
             plot:
               'Ten years after transporting drug money to alex, Piper is imprisoned for drugs',
@@ -184,7 +186,7 @@ describe('Games Api', () => {
           .send({
             title: 'Orange is the new black',
             genres: 'Drama',
-            producer: 'Joy',
+            developer: 'Joy',
             cast: 'Alex Michael',
             plot:
               'Ten years after transporting drug money to alex, Piper is imprisoned for drugs',
@@ -202,7 +204,7 @@ describe('Games Api', () => {
           .send({
             title: 'Orange is the new black',
             genres: 'Drama',
-            producer: 'Joy',
+            developer: 'Joy',
             cast: 'Alex Michael',
             plot:
               'Ten years after transporting drug money to alex, Piper is imprisoned for drugs',
@@ -220,7 +222,7 @@ describe('Games Api', () => {
           .send({
             title: '',
             genres: 'Drama',
-            producer: 'Joy',
+            developer: 'Joy',
             cast: 'Alex Michael',
             plot:
               'Ten years after transporting drug money to alex, Piper is imprisoned for drugs',
@@ -232,13 +234,13 @@ describe('Games Api', () => {
             done()
           })
       })
-      it('should return producer cannot be empty if user doesnt put an producer', (done) => {
+      it('should return developer cannot be empty if user doesnt put an developer', (done) => {
         request
           .post('/games')
           .send({
             title: 'Orange is the new black',
             genres: 'Drama',
-            producer: '',
+            developer: '',
             cast: 'Alex Michael',
             plot:
               'Ten years after transporting drug money to alex, Piper is imprisoned for drugs',
@@ -406,6 +408,19 @@ describe('Games Api', () => {
         request
           .get('/games/year')
           .query({ year_less_than: 2002 })
+          .end((err, res) => {
+            res.status.should.be.equal(200)
+            expect(res.body.data).to.be.an('array')
+            done()
+          })
+      })
+    })
+
+    describe('Get games By description route', () => {
+      it('should get games by description', (done) => {
+        request
+          .get('/games/description')
+          .query({ description: 'update description test' })
           .end((err, res) => {
             res.status.should.be.equal(200)
             expect(res.body.data).to.be.an('array')
