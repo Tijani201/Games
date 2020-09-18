@@ -39,7 +39,8 @@ class User {
             },
             secret
           )
-        }))
+        })
+      )
     })
   }
 }
