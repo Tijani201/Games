@@ -1,3 +1,6 @@
+
+/* eslint-disable implicit-arrow-linebreak */
+
 import jwt from 'jsonwebtoken'
 import bcrypt from 'bcryptjs'
 import models from '../models/index'
@@ -7,6 +10,7 @@ require('dotenv').config()
 const rounds = 8
 const UserModel = models.User
 const secret = process.env.JWT_SECRET
+let password = ''
 
 class User {
   static signUp(req, res) {
@@ -14,6 +18,7 @@ class User {
       where: {
         email: req.body.email
       }
+      // eslint-disable-next-line consistent-return
     }).then((user) => {
       if (user) {
         return res.status(409).send({
