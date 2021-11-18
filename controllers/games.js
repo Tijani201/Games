@@ -65,7 +65,7 @@ class Games {
           rating: games.rating,
           likes: games.likes,
           year: req.body.year || games.year,
-          price: req.body.price || games.price,
+          developer: req.body.developer || games.developer,
           description: req.body.description || games.description
         })
         .then((updatedGames) => {
