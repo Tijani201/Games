@@ -37,10 +37,21 @@ describe('Games Api', () => {
       description: 'No Goblin'
     })
 
+    await gamesModel.create({
+      title: 'Flight Emulator',
+      genres: 'arcade',
+      rating: 9,
+      likes: 210,
+      year: 2026,
+      developer: 'Usman Teejay',
+      description: 'Another random test games'
+    })
+
     gamesToDelete = await gamesModel.create({
       title: 'Pes 2021',
       genres: 'Sport',
       rating: 500,
+      likes: 470,
       year: 2021,
       description: 'Pro Evolution Soccer'
     })
